@@ -154,7 +154,10 @@ public class Schedule {
             for (Integer node : nodeTasksMap.keySet()) {
                 Tasks tasks = nodeTasksMap.get(node);
                 tasks.addTask(m1.get(v).get(0), v);
-                if (tasks.getNodeConsumption() <= single) {
+
+                if (i == (valuesList.size() - 1)) {
+                    break;
+                } else if (tasks.getNodeConsumption() <= single) {
                     break;
                 } else {
                     tasks.deleteTask(m1.get(v).get(0));
@@ -181,9 +184,6 @@ public class Schedule {
     }
 
     public int queryTaskStatus(List<TaskInfo> tasks) {
-        if (tasks == null) {
-            return ReturnCodeKeys.E016;
-        }
 
         for (Integer i : nodeTasksMap.keySet()) {
             for (Integer j : nodeTasksMap.get(i).getTaskConsumptionMap().keySet()) {
